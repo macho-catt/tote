@@ -20,7 +20,10 @@
       "prettier"
   ],
   "rules": {
+    "import/no-cycle": 1,
+    "import/prefer-default-export": 1,
     "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-props-no-spreading": "off"
   }
 }

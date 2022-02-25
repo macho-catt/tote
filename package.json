@@ -14,6 +14,7 @@
     "*.{js,jsx,json,css,md,mdx}": "npm run prettier"
   },
   "dependencies": {
+    "dayjs": "^1.10.7",
     "next": "latest",
     "prop-types": "^15.8.1",
     "react": "17.0.2",
