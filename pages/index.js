@@ -67,8 +67,12 @@ export default function Home({ quotesData }) {
 
   // Trigger when quotesData changes due to refresh
   useEffect(() => {
-    setCurrQuote(quotesData.pop());
-    setIsRefreshing(false);
+    // ensures quotesData does not get popped twice on initial render
+    if (isRefreshing) {
+      console.log('test');
+      setCurrQuote(quotesData.pop());
+      setIsRefreshing(false);
+    }
   }, [quotesData]);
 
   // Update current quote every minute by refreshing the page
@@ -114,5 +118,5 @@ Home.propTypes = {
 };
 
 Home.defaultProps = {
-  quotesData: null,
+  quotesData: 'test',
 };
