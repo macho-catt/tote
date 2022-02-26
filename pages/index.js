@@ -11,9 +11,9 @@ export default function Home() {
   const [sec, setSec] = useState(dayjs().format('ss'));
 
   const value = useMemo(() => ({
-    setHour,
-    setMin,
-    setSec,
+    hour: [hour, setHour],
+    min: [min, setMin],
+    sec: [sec, setSec],
   }));
 
   const decToHex = (dec) => {
@@ -69,7 +69,7 @@ export default function Home() {
           </ClockContext.Provider>
 
           <div>{bgColor}</div>
-          <div>{luminance}</div>
+          <div>{luminance.toFixed(4)}</div>
         </main>
       </div>
     </div>
