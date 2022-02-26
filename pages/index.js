@@ -1,17 +1,37 @@
 import React, { useState, useEffect, useMemo, createContext } from 'react';
+import { useRouter } from 'next/router';
+// import useSWR from 'swr'
 import dayjs from 'dayjs';
-import { AppHead, Clock, ColorInfo } from '../components';
+import PropTypes from 'prop-types';
+import { AppHead, Clock, ColorInfo, Quote } from '../components';
 import { transformToColor, getLuminance } from '../lib/colors';
-import layoutStyles from '../styles/pages/layout.styles';
+import rest from '../lib/fetcher';
+import homeStyles from '../styles/pages/home.styles';
 
 export const ClockContext = createContext();
 
-export default function Home() {
+export async function getStaticProps() {
+  try {
+    const quotesApiUrl = `https://zenquotes.io/api/quotes/`;
+    // for testing
+    // const quotesApiUrl = `https://zenquotes.io/api/random`;
+    const quotesData = await rest(quotesApiUrl);
+    return {
+      props: {
+        quotesData,
+      },
+    };
+  } catch (error) {
+    return { props: {} };
+  }
+}
+
+export default function Home({ quotesData }) {
   const [hour, setHour] = useState(dayjs().format('HH'));
   const [min, setMin] = useState(dayjs().format('mm'));
   const [sec, setSec] = useState(dayjs().format('ss'));
 
-  const value = useMemo(() => ({
+  const timeValue = useMemo(() => ({
     hour: [hour, setHour],
     min: [min, setMin],
     sec: [sec, setSec],
@@ -35,6 +55,31 @@ export default function Home() {
     else setTextColor('text-white');
   }, [luminance]);
 
+  const [currQuote, setCurrQuote] = useState(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const router = useRouter();
+
+  // *trick* to refresh the page: https://www.joshwcomeau.com/nextjs/refreshing-server-side-props/
+  const refreshData = () => {
+    router.replace(router.asPath);
+    setIsRefreshing(true);
+  };
+
+  // Trigger when quotesData changes due to refresh
+  useEffect(() => {
+    setCurrQuote(quotesData.pop());
+    setIsRefreshing(false);
+  }, [quotesData]);
+
+  // Update current quote every minute by refreshing the page
+  useEffect(() => {
+    if (quotesData.length === 0) {
+      refreshData();
+    } else {
+      setCurrQuote(quotesData.pop());
+    }
+  }, [min]);
+
   return (
     <div>
       <AppHead />
@@ -45,8 +90,10 @@ export default function Home() {
         style={{ background: `${bgColor}` }}
       >
         {/* <div id="root" className={`bg-[${color}]`}> */}
-        <main className={layoutStyles.main}>
-          <ClockContext.Provider value={value}>
+        <main className={homeStyles.main}>
+          <Quote currQuote={currQuote} isRefreshing={isRefreshing} />
+
+          <ClockContext.Provider value={timeValue}>
             <Clock />
           </ClockContext.Provider>
 
@@ -56,3 +103,16 @@ export default function Home() {
     </div>
   );
 }
+
+Home.propTypes = {
+  quotesData: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.arrayOf(PropTypes.object),
+    PropTypes.objectOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+};
+
+Home.defaultProps = {
+  quotesData: null,
+};
