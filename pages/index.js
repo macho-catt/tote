@@ -69,12 +69,15 @@ export default function Home({ quotesData }) {
 
   // *trick* to refresh the page: https://www.joshwcomeau.com/nextjs/refreshing-server-side-props/
   const refreshData = async () => {
+    setIsRefreshing(true);
+
     // trigger on-demand revalidation
     await fetch(
       `/api/revalidate?secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`
     );
-    router.replace(router.asPath);
-    setIsRefreshing(true);
+    // it appears that a second call to router.replace does not work. Temp fix is to use a page reload.
+    // await router.replace(router.asPath);
+    router.reload();
   };
 
   // Trigger when quotesData changes due to refresh
