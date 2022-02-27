@@ -15,7 +15,7 @@ const DEF_QUOTE = {
   a: `Iroh, Avatar: The Last Airbender`,
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   try {
     const quotesApiUrl = `https://zenquotes.io/api/quotes/`;
     // for testing
@@ -71,13 +71,15 @@ export default function Home({ quotesData }) {
   const refreshData = async () => {
     setIsRefreshing(true);
 
-    // trigger on-demand revalidation
-    await fetch(
-      `/api/revalidate?secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`
-    );
-    // it appears that a second call to router.replace does not work. Temp fix is to use a page reload.
-    // await router.replace(router.asPath);
-    router.reload();
+    /* 
+    // //trigger on-demand revalidation
+    // await fetch(
+    //   `/api/revalidate?secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`
+    // );
+    // //it appears that a second call to router.replace does not work. Temp fix is to use a page reloaad.
+    // router.reload();
+    */
+    await router.replace(router.asPath);
   };
 
   // Trigger when quotesData changes due to refresh
