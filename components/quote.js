@@ -16,7 +16,7 @@ export default function Quote({ isRefreshing, currQuote }) {
       ) : (
         <div>
           {currQuote && (
-            <div>
+            <div className={quoteStyles.content}>
               <h2 className={quoteStyles.h2}> {currQuote.q} </h2>
               <h1 className={quoteStyles.h1}>- {currQuote.a} </h1>
             </div>

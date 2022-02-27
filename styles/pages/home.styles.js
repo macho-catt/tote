@@ -5,12 +5,11 @@ const homeStyles = {
     'flex',
     'flex-col',
     'place-content-center',
-    'gap-10',
+    'gap-20',
     'h-screen',
     'text-center',
     'mx-10',
     'lg:mx-0',
-    'lg:gap-20',
   ].join(' '),
 };
 
