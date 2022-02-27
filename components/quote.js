@@ -6,9 +6,22 @@ export default function Quote({ isRefreshing, currQuote }) {
   return (
     <section className={quoteStyles.section}>
       {isRefreshing ? (
-        <div>Data refreshing...</div>
+        <div>
+          <span
+            className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+            role="status"
+          />
+          <h2 className={quoteStyles.h1}>Data refreshing...</h2>
+        </div>
       ) : (
-        <div>{currQuote && currQuote.q}</div>
+        <div>
+          {currQuote && (
+            <div>
+              <h2 className={quoteStyles.h2}> {currQuote.q} </h2>
+              <h1 className={quoteStyles.h1}>- {currQuote.a} </h1>
+            </div>
+          )}
+        </div>
       )}
     </section>
   );

@@ -30,6 +30,9 @@ export default function Home({ quotesData }) {
   const [hour, setHour] = useState(dayjs().format('HH'));
   const [min, setMin] = useState(dayjs().format('mm'));
   const [sec, setSec] = useState(dayjs().format('ss'));
+  // const [hour, setHour] = useState(null);
+  // const [min, setMin] = useState(null);
+  // const [sec, setSec] = useState(null);
 
   const timeValue = useMemo(() => ({
     hour: [hour, setHour],
@@ -69,7 +72,6 @@ export default function Home({ quotesData }) {
   useEffect(() => {
     // ensures quotesData does not get popped twice on initial render
     if (isRefreshing) {
-      console.log('test');
       setCurrQuote(quotesData.pop());
       setIsRefreshing(false);
     }
@@ -80,7 +82,20 @@ export default function Home({ quotesData }) {
     if (quotesData.length === 0) {
       refreshData();
     } else {
-      setCurrQuote(quotesData.pop());
+      const quote = quotesData.pop();
+      // Ensure quote is valid
+      if (
+        quote.q ===
+        'Too many requests. Obtain an auth key for unlimited access.'
+      ) {
+        const tempQuote = {
+          q: `Destiniy is a funny thing. You never know how things are going to work out.`,
+          a: `Iroh, Avatar: The Last Airbender`,
+        };
+        setCurrQuote(tempQuote);
+      } else {
+        setCurrQuote(quote);
+      }
     }
   }, [min]);
 

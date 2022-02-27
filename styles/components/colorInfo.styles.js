@@ -6,7 +6,7 @@ const colorInfoStyles = {
     'text-center',
     'text-lg',
     'lg:text-xl',
-    'lg:w-1/6',
+    'lg:w-2/6',
     // 'bg-blue-500'
   ].join(' '),
 };
