@@ -17,9 +17,9 @@ const DEF_QUOTE = {
 
 export async function getStaticProps() {
   try {
-    // const quotesApiUrl = `https://zenquotes.io/api/quotes/`;
+    const quotesApiUrl = `https://zenquotes.io/api/quotes/`;
     // for testing
-    const quotesApiUrl = `https://zenquotes.io/api/random`;
+    // const quotesApiUrl = `https://zenquotes.io/api/random`;
     const quotesData = await rest(quotesApiUrl);
     return {
       props: {
