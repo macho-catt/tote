@@ -15,12 +15,11 @@ const DEF_QUOTE = {
   a: `Iroh, Avatar: The Last Airbender`,
 };
 
-// Until on-demand revalidation is not in beta anymore, use getServerSideProps first
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
-    const quotesApiUrl = `https://zenquotes.io/api/quotes/`;
+    // const quotesApiUrl = `https://zenquotes.io/api/quotes/`;
     // for testing
-    // const quotesApiUrl = `https://zenquotes.io/api/random`;
+    const quotesApiUrl = `https://zenquotes.io/api/random`;
     const quotesData = await rest(quotesApiUrl);
     return {
       props: {
@@ -70,8 +69,10 @@ export default function Home({ quotesData }) {
 
   // *trick* to refresh the page: https://www.joshwcomeau.com/nextjs/refreshing-server-side-props/
   const refreshData = async () => {
-    // trigger on-demand revalidation. Use and uncomment when not in beta anymore.
-    // await fetch(`/api/revalidate?secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`);
+    // trigger on-demand revalidation
+    await fetch(
+      `/api/revalidate?secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`
+    );
     router.replace(router.asPath);
     setIsRefreshing(true);
   };
