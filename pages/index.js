@@ -10,7 +10,13 @@ import homeStyles from '../styles/pages/home.styles';
 
 export const ClockContext = createContext();
 
-export async function getStaticProps() {
+const DEF_QUOTE = {
+  q: `Destiny is a funny thing. You never know how things are going to work out.`,
+  a: `Iroh, Avatar: The Last Airbender`,
+};
+
+// Until on-demand revalidation is not in beta anymore, use getServerSideProps first
+export async function getServerSideProps() {
   try {
     const quotesApiUrl = `https://zenquotes.io/api/quotes/`;
     // for testing
@@ -63,7 +69,9 @@ export default function Home({ quotesData }) {
   const router = useRouter();
 
   // *trick* to refresh the page: https://www.joshwcomeau.com/nextjs/refreshing-server-side-props/
-  const refreshData = () => {
+  const refreshData = async () => {
+    // trigger on-demand revalidation. Use and uncomment when not in beta anymore.
+    // await fetch(`/api/revalidate?secret=${process.env.NEXT_PUBLIC_REVALIDATE_TOKEN}`);
     router.replace(router.asPath);
     setIsRefreshing(true);
   };
@@ -77,7 +85,7 @@ export default function Home({ quotesData }) {
     }
   }, [quotesData]);
 
-  // Update current quote every minute by refreshing the page
+  // Update current quote every minute. Refresh the page if quotesData is empty.
   useEffect(() => {
     if (quotesData.length === 0) {
       refreshData();
@@ -88,11 +96,7 @@ export default function Home({ quotesData }) {
         quote.q ===
         'Too many requests. Obtain an auth key for unlimited access.'
       ) {
-        const tempQuote = {
-          q: `Destiniy is a funny thing. You never know how things are going to work out.`,
-          a: `Iroh, Avatar: The Last Airbender`,
-        };
-        setCurrQuote(tempQuote);
+        setCurrQuote(DEF_QUOTE);
       } else {
         setCurrQuote(quote);
       }
@@ -133,5 +137,5 @@ Home.propTypes = {
 };
 
 Home.defaultProps = {
-  quotesData: 'test',
+  quotesData: DEF_QUOTE,
 };
