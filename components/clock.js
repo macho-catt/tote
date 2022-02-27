@@ -24,9 +24,19 @@ export default function Clock() {
 
   return (
     <section className={clockStyles.section}>
+      {/* { secVal === null ? (
+          <div>
+            <span
+              className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+              role="status"
+            />
+          </div>
+        ) : ( */}
       <div>
         {hourVal}:{minVal}:{secVal}
       </div>
+      {/* )
+      } */}
     </section>
   );
 }
