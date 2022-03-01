@@ -65,6 +65,7 @@ export default function Home({ quotesData }) {
 
   const [currQuote, setCurrQuote] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isQuoteShowing, setIsQuoteShowing] = useState(true);
   const router = useRouter();
 
   // *trick* to refresh the page: https://www.joshwcomeau.com/nextjs/refreshing-server-side-props/
@@ -96,16 +97,22 @@ export default function Home({ quotesData }) {
     if (quotesData.length === 0) {
       refreshData();
     } else {
-      const quote = quotesData.pop();
-      // Ensure quote is valid
-      if (
-        quote.q ===
-        'Too many requests. Obtain an auth key for unlimited access.'
-      ) {
-        setCurrQuote(DEF_QUOTE);
-      } else {
-        setCurrQuote(quote);
-      }
+      setIsQuoteShowing(false);
+
+      setTimeout(() => {
+        const quote = quotesData.pop();
+        // Ensure quote is valid
+        if (
+          quote.q ===
+          'Too many requests. Obtain an auth key for unlimited access.'
+        ) {
+          setCurrQuote(DEF_QUOTE);
+        } else {
+          setCurrQuote(quote);
+        }
+
+        setIsQuoteShowing(true);
+      }, 500);
     }
   }, [min]);
 
@@ -120,7 +127,11 @@ export default function Home({ quotesData }) {
       >
         {/* <div id="root" className={`bg-[${color}]`}> */}
         <main className={homeStyles.main}>
-          <Quote currQuote={currQuote} isRefreshing={isRefreshing} />
+          <Quote
+            currQuote={currQuote}
+            isRefreshing={isRefreshing}
+            isShowing={isQuoteShowing}
+          />
 
           <ClockContext.Provider value={timeValue}>
             <Clock />

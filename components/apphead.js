@@ -9,7 +9,7 @@ export default function AppHead() {
     <Head>
       <title>{title}</title>
       <link rel="icon" href="/favicon.ico" />
-      <html lang="en" />
+      {/* <html lang="en" /> */}
       <meta name="description" content={description} key="desc" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />

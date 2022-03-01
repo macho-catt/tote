@@ -14,6 +14,7 @@
     "*.{js,jsx,json,css,md,mdx}": "npm run prettier"
   },
   "dependencies": {
+    "@headlessui/react": "^1.5.0",
     "dayjs": "^1.10.7",
     "hsluv": "^0.1.0",
     "next": "latest",
