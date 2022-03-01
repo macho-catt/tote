@@ -1,16 +1,27 @@
 const infoStyles = {
-  section: ['fixed', 'top-0', 'flex', 'flex-col', 'w-screen'].join(' '),
+  section: [
+    'fixed',
+    'top-0',
+    'flex',
+    'flex-col',
+    'w-screen',
+    '-ml-10',
+    'lg:mx-0',
+  ].join(' '),
 
   question: [
-    'mt-2',
+    'mt-4',
+    'mr-4',
     'h-6',
     'w-6',
     'border',
     'border-current',
     'rounded-lg',
-    'place-self-center',
-    '-ml-20',
-    'lg:mx-0',
+    'place-self-end',
+    'z-20',
+    'lg:mt-2',
+    'lg:mr-0',
+    'lg:place-self-center',
     'lg:hover:text-2xl',
     'lg:hover:h-8',
     'lg:hover:w-8',
@@ -42,7 +53,7 @@ const infoStyles = {
     'lg:w-2/6',
   ].join(' '),
 
-  title: ['mt-4', 'text-3xl', 'lg:text-4xl'].join(' '),
+  title: ['mt-4', 'text-xl', 'lg:text-4xl'].join(' '),
 
   desc: [
     'mx-6',
@@ -50,6 +61,8 @@ const infoStyles = {
     'flex',
     'flex-col',
     'gap-3',
+    'text-sm',
+    'md:text-base',
     'lg:gap-4',
     'lg:mx-10',
   ].join(' '),
