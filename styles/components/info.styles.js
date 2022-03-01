@@ -11,13 +11,13 @@ const infoStyles = {
 
   question: [
     'mt-4',
-    'mr-4',
+    'mr-6',
     'h-6',
     'w-6',
     'border',
     'border-current',
     'rounded-lg',
-    'place-self-start',
+    'self-end',
     'z-20',
     'lg:mt-2',
     'lg:mr-0',
