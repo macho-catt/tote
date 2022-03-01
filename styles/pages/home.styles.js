@@ -1,5 +1,5 @@
 const homeStyles = {
-  root: [].join(' '),
+  root: ['h-screen'].join(' '),
 
   main: [
     'flex',

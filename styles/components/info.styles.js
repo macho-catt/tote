@@ -17,7 +17,7 @@ const infoStyles = {
     'border',
     'border-current',
     'rounded-lg',
-    'place-self-end',
+    'place-self-start',
     'z-20',
     'lg:mt-2',
     'lg:mr-0',
@@ -69,12 +69,13 @@ const infoStyles = {
 
   links: [
     'mx-6',
-    'my-10',
+    'my-4',
     'flex',
     'flex-row',
     'justify-self-end',
     'justify-between',
     'lg:mx-10',
+    'lg:my-10',
   ].join(' '),
 
   a: ['text-blue-800', 'lg:hover:text-emerald-600'].join(' '),
