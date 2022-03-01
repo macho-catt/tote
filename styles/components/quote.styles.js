@@ -1,9 +1,9 @@
 const quoteStyles = {
   section: [
     'place-self-center',
-    'h-20',
+    'h-1/6',
+    'lg:h-20',
     'lg:w-4/6',
-    // 'lg:h-20',
     // 'bg-blue-500'
   ].join(' '),
 
