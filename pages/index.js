@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 // import useSWR from 'swr'
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
-import { AppHead, Clock, ColorInfo, Quote } from '../components';
+import { AppHead, Clock, ColorInfo, Quote, Info } from '../components';
 import { transformToColor, getLuminance } from '../lib/colors';
 import rest from '../lib/fetcher';
 import homeStyles from '../styles/pages/home.styles';
@@ -127,6 +127,7 @@ export default function Home({ quotesData }) {
       >
         {/* <div id="root" className={`bg-[${color}]`}> */}
         <main className={homeStyles.main}>
+          <Info />
           <Quote
             currQuote={currQuote}
             isRefreshing={isRefreshing}
