@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dialog , Transition } from '@headlessui/react';
+import { Dialog, Transition } from '@headlessui/react';
 import { infoStyles } from '../styles/components';
 
 export default function Info() {
@@ -86,6 +86,7 @@ export default function Info() {
                 and the quotes are obtained through an API request to{' '}
                 <a
                   href="https://zenquotes.io/"
+                  className={infoStyles.a}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
