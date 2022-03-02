@@ -12,6 +12,7 @@
 postcss.config.js
 tailwind.config.js
 README.md
+LICENSE
 .env.local
 .env.development.local
 .env.test.local

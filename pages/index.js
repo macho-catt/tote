@@ -122,6 +122,7 @@ export default function Home({ quotesData }) {
 
       <div
         id="root"
+        data-testid="root"
         className={`${textColor}`}
         style={{ background: `${bgColor}` }}
       >

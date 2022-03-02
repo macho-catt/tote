@@ -1,12 +1,15 @@
 {
   "env": {
       "browser": true,
+      "jest/globals": true,
       "es2021": true
   },
   "extends": [
       "airbnb",
       "prettier",
-      "plugin:@next/next/recommended"
+      "plugin:@next/next/recommended",
+      "plugin:testing-library/react",
+      "plugin:jest/all"
   ],
   "parserOptions": {
       "ecmaFeatures": {
@@ -17,13 +20,36 @@
   },
   "plugins": [
       "react",
-      "prettier"
+      "prettier",
+      "testing-library",
+      "jest"
   ],
   "rules": {
     "import/no-cycle": 1,
     "import/prefer-default-export": 1,
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/jsx-props-no-spreading": "off"
-  }
+    "react/jsx-props-no-spreading": "off",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "jest/no-hooks": [
+      "error",
+      {
+        "allow": ["afterEach", "afterAll", "beforeEach", "beforeAll"]
+      }
+    ],
+    "jest/require-hook": [
+      "error",
+      {
+        "allowedFunctionCalls": ["enableFetchMocks"]
+      }
+    ],
+    "testing-library/no-render-in-setup": ["error", {"allowTestingFrameworkSetupHook": "beforeEach"}]
+  },
+  "overrides": [
+    {
+      // 3) Now we enable eslint-plugin-testing-library rules or preset only for matching files!
+      "files": ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+      "extends": ["plugin:testing-library/react"]
+    }
+  ]
 }
