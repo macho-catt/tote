@@ -51,7 +51,7 @@ export default function Info() {
             <Dialog.Title as="h1" className={infoStyles.title}>
               tote
             </Dialog.Title>
-            <Dialog.Description className={infoStyles.desc}>
+            <Dialog.Description as="div" className={infoStyles.desc}>
               <p>
                 tote (time + quote) displays a changing background color based
                 on the current time of day. Every minute, a new quote appears on

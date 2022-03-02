@@ -15,8 +15,8 @@ describe('hook useToggleTime', () => {
     });
     await waitForNextUpdate();
 
-    await expect(result.current[0]).resolves.toBe(false);
-    await expect(result.current[1]).resolves.toBe(true);
+    expect(result.current[0]).toBe(false);
+    expect(result.current[1]).toBe(true);
 
     // second toggle
     act(() => {
@@ -24,7 +24,7 @@ describe('hook useToggleTime', () => {
     });
     await waitForNextUpdate();
 
-    await expect(result.current[0]).resolves.toBe(true);
-    await expect(result.current[1]).resolves.toBe(true);
+    expect(result.current[0]).toBe(true);
+    expect(result.current[1]).toBe(true);
   });
 });
