@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import dayjs from 'dayjs';
+import { Transition } from '@headlessui/react';
 import { clockStyles } from '../styles/components';
 import { ClockContext } from '../pages';
 
@@ -11,9 +12,15 @@ export default function Clock() {
   const timeRef = useRef();
 
   const [isMilitary, setIsMilitary] = useState(true);
+  const [isShowing, setIsShowing] = useState(true);
 
   const toggleTime = () => {
-    setIsMilitary(!isMilitary);
+    setIsShowing(false);
+
+    setTimeout(() => {
+      setIsMilitary(!isMilitary);
+      setIsShowing(true);
+    }, 500);
   };
 
   const toStandard = (h, m, s) => {
@@ -37,19 +44,37 @@ export default function Clock() {
 
   return (
     <section className={clockStyles.section}>
-      {isMilitary ? (
-        <button onClick={toggleTime} type="button" className={clockStyles.btn}>
-          <div>
-            {hourVal}:{minVal}:{secVal}
-          </div>
-        </button>
-      ) : (
-        <button onClick={toggleTime} type="button" className={clockStyles.btn}>
-          <div className={clockStyles.standard}>
-            {toStandard(hourVal, minVal, secVal)}
-          </div>
-        </button>
-      )}
+      <Transition
+        show={isShowing}
+        enter="transition duration-500"
+        enterFrom="-translate-x-12 opacity-0 scale-95"
+        enterTo="translate-x-0 opacity-100 scale-100"
+        leave="transition duration-300"
+        leaveFrom="translate-x-0 opacity-100 scale-100"
+        leaveTo="-translate-x-12 opacity-0 scale-95"
+      >
+        {isMilitary ? (
+          <button
+            onClick={toggleTime}
+            type="button"
+            className={clockStyles.btn}
+          >
+            <div>
+              {hourVal}:{minVal}:{secVal}
+            </div>
+          </button>
+        ) : (
+          <button
+            onClick={toggleTime}
+            type="button"
+            className={clockStyles.btn}
+          >
+            <div className={clockStyles.standard}>
+              {toStandard(hourVal, minVal, secVal)}
+            </div>
+          </button>
+        )}
+      </Transition>
     </section>
   );
 }

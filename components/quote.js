@@ -19,12 +19,12 @@ export default function Quote({ isRefreshing, currQuote, isShowing }) {
           {currQuote && (
             <Transition
               show={isShowing}
-              enter="transition-opacity duration-75"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="transition-opacity duration-150"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
+              enter="ease-out duration-500"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-300"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
               className={quoteStyles.content}
             >
               <h2 className={quoteStyles.h2}> {currQuote.q} </h2>

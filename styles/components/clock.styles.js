@@ -1,5 +1,5 @@
 const clockStyles = {
-  section: ['text-center', 'text-6xl', 'lg:text-8xl'].join(' '),
+  section: ['text-center', 'text-6xl', 'h-1/6', 'lg:text-8xl'].join(' '),
 
   standard: ['text-5xl', 'lg:text-8xl'].join(' '),
 
