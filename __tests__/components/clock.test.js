@@ -47,24 +47,4 @@ describe('clock', () => {
       expect(screen.getByText(standardTime)).toBeInTheDocument();
     });
   });
-
-  // it.skip('should toggle between military and standard time', async () => {
-  //   // expect.assertions(1);
-
-  //   const button1 = screen.getByTestId('toStandardBtn');
-  //   fireEvent.click(button1);
-
-  //   const textInStandard = await screen.findByTestId("standardTime");
-  //   expect(textInStandard).toBeInTheDocument();
-
-  //   const button2 = await screen.findByTestId('toMilitaryBtn');
-  //   fireEvent.click(button2);
-
-  //   const textInMilitary = await screen.findByTestId("militaryTime");
-  //   expect(textInMilitary).toBeInTheDocument();
-
-  //   // await waitFor(() => {
-  //   //   expect(screen.getByText(`${hour}:${min}:${sec}`)).toBeInTheDocument();
-  //   // })
-  // })
 });
