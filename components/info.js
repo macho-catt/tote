@@ -108,7 +108,7 @@ export default function Info() {
               </div>
               <div>
                 <a
-                  href="mattcacho.com"
+                  href="https://www.mattcacho.com"
                   className={infoStyles.a}
                   target="_blank"
                   rel="noopener noreferrer"
