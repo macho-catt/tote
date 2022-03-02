@@ -22,6 +22,7 @@
       "react",
       "prettier",
       "testing-library",
+      "react-hooks",
       "jest"
   ],
   "rules": {
@@ -43,6 +44,7 @@
         "allowedFunctionCalls": ["enableFetchMocks"]
       }
     ],
+    "jest/no-commented-out-tests": "warn",
     "testing-library/no-render-in-setup": ["error", {"allowTestingFrameworkSetupHook": "beforeEach"}]
   }
 }

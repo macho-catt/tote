@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import dayjs from 'dayjs';
 import { Transition } from '@headlessui/react';
 import { clockStyles } from '../styles/components';
 import { ClockContext } from '../pages';
+import { toStandard } from '../lib/time';
+import { useToggleTime } from '../hooks';
 
 export default function Clock() {
   const { hour, min, sec } = useContext(ClockContext);
@@ -11,24 +13,7 @@ export default function Clock() {
   const [secVal, setSecVal] = sec;
   const timeRef = useRef();
 
-  const [isMilitary, setIsMilitary] = useState(true);
-  const [isShowing, setIsShowing] = useState(true);
-
-  const toggleTime = () => {
-    setIsShowing(false);
-
-    setTimeout(() => {
-      setIsMilitary(!isMilitary);
-      setIsShowing(true);
-    }, 500);
-  };
-
-  const toStandard = (h, m, s) => {
-    if (h < 1) return `12:${m}:${s} am`;
-    if (h < 12) return `${h}:${m}:${s} am`;
-    if (h > 12) return `${h - 12}:${m}:${s} pm`;
-    return `${h}:${m}:${s} pm`;
-  };
+  const [isMilitary, isShowing, toggle] = useToggleTime();
 
   const getTimeNow = () => {
     setHourVal(dayjs().format('HH'));
@@ -55,21 +40,23 @@ export default function Clock() {
       >
         {isMilitary ? (
           <button
-            onClick={toggleTime}
+            onClick={toggle.toggleTime}
             type="button"
             className={clockStyles.btn}
+            data-testid="toStandardBtn"
           >
-            <div>
+            <div data-testid="militaryTime">
               {hourVal}:{minVal}:{secVal}
             </div>
           </button>
         ) : (
           <button
-            onClick={toggleTime}
+            onClick={toggle.toggleTime}
             type="button"
             className={clockStyles.btn}
+            data-testid="toMilitaryBtn"
           >
-            <div className={clockStyles.standard}>
+            <div className={clockStyles.standard} data-testid="standardTime">
               {toStandard(hourVal, minVal, secVal)}
             </div>
           </button>

@@ -10,7 +10,6 @@ describe('home', () => {
   let currTextColor;
 
   beforeEach(() => {
-    render(<Home />);
     currTime = dayjs().format('HH:mm:ss');
     const hour = dayjs().format('HH');
     const min = dayjs().format('mm');
@@ -18,6 +17,7 @@ describe('home', () => {
     currBgColor = transformToColor(hour, min, sec);
     luminance = getLuminance(hour, min, sec);
     currTextColor = luminance > 127.5 ? 'text-black' : 'text-white';
+    render(<Home />);
   });
 
   it('should render the current time', () => {
