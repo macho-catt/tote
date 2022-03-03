@@ -1,4 +1,5 @@
 import { renderHook, act } from '@testing-library/react-hooks';
+import * as nextRouter from 'next/router';
 import { useQuote } from '../../hooks';
 
 describe('hook useQuote', () => {
@@ -86,13 +87,38 @@ describe('hook useQuote', () => {
     });
   });
 
-  // it('should refresh when quotes list is empty', () => {
-  //   const quotes = [];
-  //   let min = 1;
-  //   const { result, waitForNextUpdate } = renderHook(() => useQuote(quotes, min));
+  it('should refresh when quotes list is empty', async () => {
+    expect.assertions(3);
 
-  //   // act(() => jest.advanceTimersByTime(500));
-  //   // await waitForNextUpdate();
-  //   // expect(result.current.isRefreshing).toBe(true);
-  // })
+    // mock next/router
+    jest.spyOn(nextRouter, 'useRouter').mockImplementation();
+    nextRouter.useRouter.mockImplementation(() => ({
+      route: '/',
+      replace: jest.fn(),
+      asPath: '/',
+    }));
+
+    let quotes = [];
+    const min = 1;
+    const { result, rerender } = renderHook(() => useQuote(quotes, min));
+
+    act(() => jest.advanceTimersByTime(500));
+    expect(result.current.isRefreshing).toBe(true);
+
+    quotes = [
+      {
+        q: 'New quote',
+        a: 'New author',
+      },
+    ];
+
+    rerender();
+    act(() => jest.advanceTimersByTime(500));
+
+    expect(result.current.currQuote).toStrictEqual({
+      q: 'New quote',
+      a: 'New author',
+    });
+    expect(result.current.isRefreshing).toBe(false);
+  });
 });

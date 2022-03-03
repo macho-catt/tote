@@ -17,19 +17,19 @@ const DEF_QUOTE = {
 };
 
 export async function getServerSideProps() {
-  try {
-    const quotesApiUrl = `https://zenquotes.io/api/quotes/`;
-    // for testing
-    // const quotesApiUrl = `https://zenquotes.io/api/random`;
-    const quotesData = await rest(quotesApiUrl);
-    return {
-      props: {
-        quotesData,
-      },
-    };
-  } catch (error) {
-    return { props: {} };
-  }
+  // try {
+  const quotesApiUrl = `https://zenquotes.io/api/quotes/`;
+  // for testing
+  // const quotesApiUrl = `https://zenquotes.io/api/random`;
+  const quotesData = await rest(quotesApiUrl);
+  return {
+    props: {
+      quotesData,
+    },
+  };
+  // } catch (error) {
+  //   return { props: {} };
+  // }
 }
 
 export default function Home({ quotesData }) {
