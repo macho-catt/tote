@@ -15,6 +15,7 @@ tote (time + quote) displays a changing background color based on the current ti
 - Lint-Staged
 - Jest
 - React Testing Library
+- Cypress
 - Vercel
 
 ## Installation and Setup
