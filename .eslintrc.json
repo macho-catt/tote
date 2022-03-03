@@ -1,37 +1,31 @@
 {
   "env": {
-      "browser": true,
-      "jest/globals": true,
-      "es2021": true
+    "browser": true,
+    "jest/globals": true,
+    "es2021": true
   },
   "extends": [
-      "airbnb",
-      "prettier",
-      "plugin:@next/next/recommended",
-      "plugin:testing-library/react",
-      "plugin:jest/all"
+    "airbnb",
+    "prettier",
+    "plugin:@next/next/recommended",
+    "plugin:testing-library/react",
+    "plugin:jest/all"
   ],
   "parserOptions": {
-      "ecmaFeatures": {
-          "jsx": true
-      },
-      "ecmaVersion": "latest",
-      "sourceType": "module"
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
-  "plugins": [
-      "react",
-      "prettier",
-      "testing-library",
-      "react-hooks",
-      "jest"
-  ],
+  "plugins": ["react", "prettier", "testing-library", "react-hooks", "jest"],
   "rules": {
     "import/no-cycle": 1,
     "import/prefer-default-export": 1,
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-props-no-spreading": "off",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "jest/no-hooks": [
       "error",
       {
@@ -45,6 +39,9 @@
       }
     ],
     "jest/no-commented-out-tests": "warn",
-    "testing-library/no-render-in-setup": ["error", {"allowTestingFrameworkSetupHook": "beforeEach"}]
+    "testing-library/no-render-in-setup": [
+      "error",
+      { "allowTestingFrameworkSetupHook": "beforeEach" }
+    ]
   }
 }
