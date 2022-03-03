@@ -13,8 +13,10 @@ export default function App({ Component, pageProps }) {
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content={description} key="desc" />
+        <meta name="image" content="/home.png" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
+        <meta proeprty="og:image" content="/home.png" />
       </Head>
       <Component {...pageProps} />
     </>
