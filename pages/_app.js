@@ -1,8 +1,24 @@
 import '../styles/global.css';
 import PropTypes from 'prop-types';
+import Head from 'next/head';
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  const title = 'tote';
+  const description =
+    'tote (time + quote) displays the local time and a new quote very minute. The background color also changes based on the current time.';
+
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content={description} key="desc" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+      </Head>
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 App.propTypes = {

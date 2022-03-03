@@ -2,7 +2,7 @@ import React, { useState, useMemo, createContext } from 'react';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { useGetColors, useQuote } from '../hooks';
-import { AppHead, Clock, ColorInfo, Quote, Info } from '../components';
+import { Clock, ColorInfo, Quote, Info } from '../components';
 import rest from '../lib/fetcher';
 import homeStyles from '../styles/pages/home.styles';
 
@@ -46,31 +46,27 @@ export default function Home({ quotesData }) {
   const { currQuote, isRefreshing, isQuoteShowing } = useQuote(quotesData, min);
 
   return (
-    <div>
-      <AppHead />
+    <div
+      id="root"
+      data-testid="root"
+      className={textColor}
+      style={{ background: `${bgColor}` }}
+    >
+      {/* <div id="root" className={`bg-[${color}]`}> */}
+      <main className={homeStyles.main}>
+        <Info />
+        <Quote
+          currQuote={currQuote}
+          isRefreshing={isRefreshing}
+          isShowing={isQuoteShowing}
+        />
 
-      <div
-        id="root"
-        data-testid="root"
-        className={textColor}
-        style={{ background: `${bgColor}` }}
-      >
-        {/* <div id="root" className={`bg-[${color}]`}> */}
-        <main className={homeStyles.main}>
-          <Info />
-          <Quote
-            currQuote={currQuote}
-            isRefreshing={isRefreshing}
-            isShowing={isQuoteShowing}
-          />
+        <ClockContext.Provider value={timeValue}>
+          <Clock />
+        </ClockContext.Provider>
 
-          <ClockContext.Provider value={timeValue}>
-            <Clock />
-          </ClockContext.Provider>
-
-          <ColorInfo bgColor={bgColor} luminance={luminance} />
-        </main>
-      </div>
+        <ColorInfo bgColor={bgColor} luminance={luminance} />
+      </main>
     </div>
   );
 }
