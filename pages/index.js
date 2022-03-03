@@ -1,5 +1,4 @@
 import React, { useState, useMemo, createContext } from 'react';
-// import useSWR from 'swr'
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { useGetColors, useQuote } from '../hooks';

@@ -6,9 +6,7 @@
 /.husky
 /coverage
 .eslintignore
-.eslintrc.json
 .prettierignore
-.prettierrc.json
 .gitignore
 postcss.config.js
 tailwind.config.js
