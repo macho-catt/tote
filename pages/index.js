@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 // import useSWR from 'swr'
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
+import { useGetColors } from '../hooks';
 import { AppHead, Clock, ColorInfo, Quote, Info } from '../components';
-import { transformToColor, getLuminance } from '../lib/colors';
 import rest from '../lib/fetcher';
 import homeStyles from '../styles/pages/home.styles';
 
@@ -35,9 +35,6 @@ export default function Home({ quotesData }) {
   const [hour, setHour] = useState(dayjs().format('HH'));
   const [min, setMin] = useState(dayjs().format('mm'));
   const [sec, setSec] = useState(dayjs().format('ss'));
-  // const [hour, setHour] = useState(null);
-  // const [min, setMin] = useState(null);
-  // const [sec, setSec] = useState(null);
 
   const timeValue = useMemo(() => ({
     hour: [hour, setHour],
@@ -45,23 +42,7 @@ export default function Home({ quotesData }) {
     sec: [sec, setSec],
   }));
 
-  const [bgColor, setBgColor] = useState(`${transformToColor(hour, min, sec)}`);
-  const [luminance, setLuminance] = useState(getLuminance(hour, min, sec));
-  const [textColor, setTextColor] = useState(
-    luminance > 127.5 ? 'text-black' : 'text-white'
-  );
-
-  // Update bg-color and luminance when time changes
-  useEffect(() => {
-    setBgColor(transformToColor(hour, min, sec));
-    setLuminance(getLuminance(hour, min, sec));
-  }, [hour, min, sec]);
-
-  // Change text-color based on luminance value
-  useEffect(() => {
-    if (luminance > 127.5) setTextColor('text-black');
-    else setTextColor('text-white');
-  }, [luminance]);
+  const { bgColor, luminance, textColor } = useGetColors(hour, min, sec);
 
   const [currQuote, setCurrQuote] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
