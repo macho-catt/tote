@@ -5,6 +5,8 @@
 .DS_Store
 /.husky
 /coverage
+/cypress/videos
+/cypress/screenshots
 .eslintignore
 .prettierignore
 .gitignore

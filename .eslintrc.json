@@ -2,15 +2,10 @@
   "env": {
     "browser": true,
     "jest/globals": true,
+    "cypress/globals": true,
     "es2021": true
   },
-  "extends": [
-    "airbnb",
-    "prettier",
-    "plugin:@next/next/recommended",
-    "plugin:testing-library/react",
-    "plugin:jest/all"
-  ],
+  "extends": ["airbnb", "prettier", "plugin:@next/next/recommended"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -18,30 +13,63 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier", "testing-library", "react-hooks", "jest"],
+  "plugins": ["react", "prettier", "react-hooks"],
   "rules": {
     "import/no-cycle": 1,
     "import/prefer-default-export": 1,
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-props-no-spreading": "off",
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-    "jest/no-hooks": [
-      "error",
-      {
-        "allow": ["afterEach", "afterAll", "beforeEach", "beforeAll"]
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+  },
+  "overrides": [
+    {
+      // Limit jest and testing library to /__tests__/ dir
+      "files": "__tests__/**/*.js",
+      "extends": [
+        "airbnb",
+        "prettier",
+        "plugin:@next/next/recommended",
+        "plugin:testing-library/react",
+        "plugin:jest/all"
+      ],
+      "plugins": [
+        "react",
+        "prettier",
+        "testing-library",
+        "react-hooks",
+        "jest"
+      ],
+      "rules": {
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/jsx-props-no-spreading": "off",
+        "jest/no-hooks": [
+          "error",
+          { "allow": ["afterEach", "afterAll", "beforeEach", "beforeAll"] }
+        ],
+        "jest/require-hook": [
+          "error",
+          { "allowedFunctionCalls": ["enableFetchMocks"] }
+        ],
+        "jest/no-commented-out-tests": "warn",
+        "testing-library/no-render-in-setup": [
+          "error",
+          { "allowTestingFrameworkSetupHook": "beforeEach" }
+        ]
       }
-    ],
-    "jest/require-hook": [
-      "error",
-      {
-        "allowedFunctionCalls": ["enableFetchMocks"]
-      }
-    ],
-    "jest/no-commented-out-tests": "warn",
-    "testing-library/no-render-in-setup": [
-      "error",
-      { "allowTestingFrameworkSetupHook": "beforeEach" }
-    ]
-  }
+    },
+    {
+      // Limit cypress to /cypress/ dir
+      "files": "cypress/**/*.js",
+      "extends": [
+        "airbnb",
+        "prettier",
+        "plugin:@next/next/recommended",
+        "plugin:cypress/recommended"
+      ],
+      "plugins": ["react", "prettier", "react-hooks", "cypress"],
+      "rules": {}
+    }
+  ]
 }
