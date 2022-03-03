@@ -12,6 +12,8 @@ export const ClockContext = createContext();
 const DEF_QUOTE = {
   q: `Destiny is a funny thing. You never know how things are going to work out.`,
   a: `Iroh, Avatar: The Last Airbender`,
+  c: null,
+  h: null,
 };
 
 export async function getServerSideProps() {
