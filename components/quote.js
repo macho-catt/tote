@@ -26,6 +26,7 @@ export default function Quote({ isRefreshing, currQuote, isShowing }) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
               className={quoteStyles.content}
+              data-testid="currQuote"
             >
               <h2 className={quoteStyles.h2}> {currQuote.q} </h2>
               <h1 className={quoteStyles.h1}>- {currQuote.a} </h1>

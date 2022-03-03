@@ -32,6 +32,7 @@
     "tw-elements": "^1.0.0-alpha11"
   },
   "devDependencies": {
+    "@cypress/mock-ssr": "github:cypress-io/cypress-mock-ssr#master",
     "@next/eslint-plugin-next": "^12.1.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
