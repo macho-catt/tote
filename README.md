@@ -46,6 +46,4 @@ The math for mapping the current time to color is based on the calculations used
 ## Todo
 
 - [ ] Incorporate testing with Github Actions after a push / pull request
-- [ ] Image for SEO
 - [ ] Loading screen
-- [ ] Potentially switch from SSR (server side render) to a statically generated site with on-demand revalidation. This option would need to use local storage instead of memory for storing the list of quotes
