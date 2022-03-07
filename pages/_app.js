@@ -5,7 +5,7 @@ import Head from 'next/head';
 export default function App({ Component, pageProps }) {
   const title = 'tote';
   const description =
-    'tote (time + quote) displays the local time and a new quote very minute. The background color also changes based on the current time.';
+    'tote (time + quote) displays a changing background color based on the current time of day. Every minute, a new quote appears on the screen.';
 
   return (
     <>
@@ -16,7 +16,8 @@ export default function App({ Component, pageProps }) {
         <meta name="image" content="/home.png" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta proeprty="og:image" content="/home.png" />
+        <meta property="og:image" content="/home.png" />
+        <meta property="og:url" content="https://tote.vercel.app" />
       </Head>
       <Component {...pageProps} />
     </>
