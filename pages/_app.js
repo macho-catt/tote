@@ -6,6 +6,7 @@ export default function App({ Component, pageProps }) {
   const title = 'tote';
   const description =
     'tote (time + quote) displays a changing background color based on the current time of day. Every minute, a new quote appears on the screen.';
+  const url = 'https://tote.vercel.app';
 
   return (
     <>
@@ -17,7 +18,7 @@ export default function App({ Component, pageProps }) {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content="/home.png" />
-        <meta property="og:url" content="https://tote.vercel.app" />
+        <meta property="og:url" content={url} />
       </Head>
       <Component {...pageProps} />
     </>
